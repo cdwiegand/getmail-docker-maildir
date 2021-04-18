@@ -1,3 +1,3 @@
 #!/bin/sh
 service cron start
-exec "$@"
+tail --follow --retry /var/log/getmail/*.log
