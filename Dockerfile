@@ -13,6 +13,6 @@ COPY --from=build /etc/cron.d/getmail.cron /etc/cron.d/
 COPY --from=build /entrypoint.sh /entrypoint.sh
 VOLUME /etc/getmail
 VOLUME /maildir
+RUN mkdir -p /var/log/getmail && touch /var/log/getmail/getmail.log
 
 ENTRYPOINT /entrypoint.sh
-CMD ["tail", "--follow", "--retry", "/var/log/getmail/*.log"]
