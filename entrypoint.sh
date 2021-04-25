@@ -1,3 +1,4 @@
 #!/bin/sh
 service cron start
-tail --follow --retry /var/log/getmail/*.log
+touch /var/log/getmail/getmail.log
+tail -f /var/log/getmail/getmail.log
