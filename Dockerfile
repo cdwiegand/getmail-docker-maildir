@@ -16,6 +16,6 @@ RUN mkdir -p /var/log/getmail && touch /var/log/getmail/getmail.log
 COPY --from=build /entrypoint.sh /entrypoint.sh
 
 # create crontab entry
-RUN (crontab -l -u root; echo "*/5 * * * *getmail -g /etc/getmail") | crontab
+RUN (crontab -l -u root; echo "*/5 * * * * getmail -g /etc/getmail") | crontab
 
 ENTRYPOINT /entrypoint.sh
