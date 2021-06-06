@@ -12,10 +12,8 @@ VOLUME /etc/getmail
 VOLUME /maildir
 
 RUN apt-get update && apt-get install -y getmail cron && apt-get clean && rm -rf /var/lib/apt/lists/*
-RUN mkdir -p /var/log/getmail && touch /var/log/getmail/getmail.log
-COPY --from=build /entrypoint.sh /entrypoint.sh
 
 # create crontab entry
-RUN (crontab -l -u root; echo "*/5 * * * * getmail -g /etc/getmail") | crontab
+RUN echo "*/5 * * * * getmail -g /etc/getmail" >> /etc/cron.d/getmail-crontab
 
-ENTRYPOINT /entrypoint.sh
+ENTRYPOINT ["cron","-f"]
