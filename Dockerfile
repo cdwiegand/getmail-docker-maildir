@@ -7,6 +7,8 @@ RUN apt-get update && apt-get install -y getmail cron && apt-get clean && rm -rf
 
 # create crontab entry
 RUN echo "*/5 * * * * getmail -g /etc/getmail" >> /etc/cron.d/getmail-crontab
-RUN mkdir -p /var/log/getmail; ln -s /dev/stdout /var/log/getmail/getmail.log
+
+# getmail complains if logfile can't exist, so create folder
+RUN mkdir -p /var/log/getmail
 
 ENTRYPOINT ["cron","-f"]
