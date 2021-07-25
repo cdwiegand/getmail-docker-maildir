@@ -3,12 +3,12 @@ VOLUME /etc/getmail
 VOLUME /maildir
 
 # keep this step small!
-RUN apt-get update && apt-get install -y getmail cron && apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y getmail && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# create crontab entry
-RUN echo "*/5 * * * * getmail -g /etc/getmail" >> /etc/cron.d/getmail-crontab
+# put file
+COPY run.sh /
 
 # getmail complains if logfile can't exist, so create folder
 RUN mkdir -p /var/log/getmail
 
-ENTRYPOINT ["cron","-f"]
+ENTRYPOINT ["/bin/bash","/run.sh"]
