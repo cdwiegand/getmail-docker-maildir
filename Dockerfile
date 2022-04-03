@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM debian:11.3-slim
 VOLUME /etc/getmail
 VOLUME /maildir
 
