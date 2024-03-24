@@ -1,4 +1,4 @@
-FROM debian:11.3-slim
+FROM debian:bookworm-20240211-slim
 VOLUME /etc/getmail
 VOLUME /maildir
 
